@@ -32,6 +32,7 @@ app.get('/index', (req,response) =>{
             console.log("err", err);
             response.redirect('404');
         }
+            console.log("no log detected -----");
             let result = JSON.parse(body);
             let x = result[3][0];
             x = x.substring(30, x.length); 
