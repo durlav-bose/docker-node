@@ -1,1 +1,37 @@
-node_modules
+# Dependency directories
+node_modules/
+
+# Build output directories
+dist/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+.cache/
+.eslintcache
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Babel
+.babelrc
+
+# Editor specific files
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Swap files and temp files
+*.swp
+*~

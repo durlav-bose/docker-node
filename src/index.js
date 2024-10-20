@@ -27,12 +27,13 @@ app.get('/index', (req,response) =>{
     });
 
     //get wikip search string
-    request(url,(err,res, body) =>{
+    request(url, (err,res, body) =>{
         if(err) {
+            console.log("err", err);
             response.redirect('404');
         }
-            result = JSON.parse(body);
-            x = result[3][0];
+            let result = JSON.parse(body);
+            let x = result[3][0];
             x = x.substring(30, x.length); 
             //get wikip json
             wikip(x , (err, final) => {
