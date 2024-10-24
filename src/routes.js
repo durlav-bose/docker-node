@@ -20,7 +20,7 @@ router.post('/item', (req, res) => {
   }
   insertItem(item)
     .then(() => {
-      res.status(200).end()
+      res.status(200).send({ message: 'Item inserted' })
     })
     .catch((err) => {
       console.log(err)
