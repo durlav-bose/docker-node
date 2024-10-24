@@ -1,32 +1,3 @@
-# # Use the official Node.js image
-# FROM node
-
-# # Set the working directory
-# WORKDIR /usr/src/app
-
-# # Copy only the package.json and package-lock.json
-# COPY package*.json ./
-
-# # Install production dependencies
-# RUN npm install --only=production
-
-# # Copy the entire source code (required for the build process)
-# COPY . .
-
-# # Build the application
-# RUN npm run build
-
-# # Remove source files after the build (optional optimization)
-# RUN rm -rf src
-
-# # Expose the app port
-# EXPOSE 3000
-
-# # Run the app in production mode from the dist folder
-# CMD ["npm", "start"]
-
-
-
 # Use a lightweight base image (Alpine)
 FROM node:14-alpine as build
 

@@ -1,12 +1,24 @@
-version: '3'
+version: '3.8'
 services:
   app:
-    image: durlavbose/node-x-docker:latest
-    container_name: node-x-docker-test
+    image: durlavbose/node-x-docker
+    container_name: node-app
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/usr/src/app
+      - "${PORT}:3000"  # Use environment variable for port
     environment:
-      - NODE_ENV=production
-    restart: always
+      MONGODB_URI: ${MONGODB_URI}
+      PORT: ${PORT}
+      MONGODB_DB: ${MONGODB_DB}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

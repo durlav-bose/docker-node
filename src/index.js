@@ -1,55 +1,16 @@
-const express = require('express');
-const app = express();
-const request = require('request');
-const wikip = require('wiki-infobox-parser');
+const express = require('express')
+const bodyParser = require('body-parser')
+const { init } = require('./db')
+const routes = require('./routes')
+require('dotenv').config()
 
-//ejs
-app.set("view engine", 'ejs');
+const app = express()
+app.use(bodyParser.json())
+app.use(routes)
 
-//routes
-app.get('/', (req,res) =>{
-    res.render('index');
-});
+const port = process.env.PORT || 3000
 
-app.get('/index', (req,response) =>{
-    let url = "https://en.wikipedia.org/w/api.php"
-    let params = {
-        action: "opensearch",
-        search: req.query.person,
-        limit: "1",
-        namespace: "0",
-        format: "json"
-    }
-
-    url = url + "?"
-    Object.keys(params).forEach( (key) => {
-        url += '&' + key + '=' + params[key]; 
-    });
-
-    //get wikip search string
-    request(url, (err,res, body) =>{
-        if(err) {
-            console.log("err", err);
-            response.redirect('404');
-        }
-            console.log("no log detected -----");
-            let result = JSON.parse(body);
-            let x = result[3][0];
-            x = x.substring(30, x.length); 
-            //get wikip json
-            wikip(x , (err, final) => {
-                if (err){
-                    response.redirect('404');
-                }
-                else{
-                    const answers = final;
-                    response.send(answers);
-                }
-            });
-    });
-
-    
-});
-
-//port
-app.listen(3000, console.log("Listening at port 3000..."))
+init().then(() => {
+  console.log(`starting server on port ${port}`);
+  app.listen(port);
+})
