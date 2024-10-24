@@ -28,7 +28,6 @@ WORKDIR /usr/src/app
 # Copy only the built files from the previous build stage
 COPY --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/views ./views
 
 # Expose the port for the app
 EXPOSE 3000
